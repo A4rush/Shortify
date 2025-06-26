@@ -13,13 +13,12 @@
 
 ### 🏠 Homepage
 
-![Homepage](./public/homepage.png)
-
-![Homepage](./public/homepage1.png)
+![Homepage](./project/public/homepage.png)  
+![Homepage Alt](./project/public/homepage1.png)
 
 ### 📊 Dashboard
 
-![Dashboard](./public/dashboard.png)
+![Dashboard](./project/public/dashboard.png)
 
 ---
 
