@@ -1,13 +1,15 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Navigation from '@/components/navigation';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Navigation from "@/components/navigation";
+import React from "react";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'LinkShort - Modern URL Shortener',
-  description: 'Shorten your URLs with style and track their performance',
+  title: "Shortify - Smarter Links, Simplified",
+  description:
+    "Shortify is a modern URL shortener that makes sharing long links fast, clean, and hassle-free. Customize, track, and manage your links with ease all in one sleek, user-friendly platform.",
 };
 
 export default function RootLayout({
@@ -18,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+        <div className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
           <Navigation />
           {children}
         </div>

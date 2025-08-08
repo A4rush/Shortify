@@ -1,23 +1,25 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
-import { Copy, ExternalLink, Check } from 'lucide-react';
-import { urlShortener, ShortenedUrl } from '@/lib/url-shortener';
-import { storage } from '@/lib/storage';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Copy, ExternalLink, Check } from "lucide-react";
+import { urlShortener, ShortenedUrl } from "@/lib/url-shortener";
+import { storage } from "@/lib/storage";
 
 export default function UrlShortenerForm() {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState<ShortenedUrl | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const isValidUrl = (string: string) => {
     try {
-      const url = string.startsWith('http') ? string : `https://${string}`;
+      const url = string.startsWith("http")
+        ? string
+        : `https://shortify.${string}`;
       new URL(url);
       return true;
     } catch {
@@ -30,23 +32,23 @@ export default function UrlShortenerForm() {
     if (!url.trim()) return;
 
     if (!isValidUrl(url)) {
-      setError('Please enter a valid URL');
+      setError("Please enter a valid URL");
       return;
     }
 
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       // Simulate network delay for better UX
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
       const shortened = urlShortener.shortenUrl(url);
       storage.saveUrl(shortened);
       setShortenedUrl(shortened);
-      setUrl('');
+      setUrl("");
     } catch (err) {
-      setError('Failed to shorten URL. Please try again.');
+      setError("Failed to shorten URL. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -54,20 +56,20 @@ export default function UrlShortenerForm() {
 
   const copyToClipboard = async () => {
     if (!shortenedUrl) return;
-    
+
     const shortUrl = `${window.location.origin}/${shortenedUrl.shortCode}`;
-    
+
     try {
       await navigator.clipboard.writeText(shortUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
       // Fallback for browsers that don't support clipboard API
-      const textArea = document.createElement('textarea');
+      const textArea = document.createElement("textarea");
       textArea.value = shortUrl;
       document.body.appendChild(textArea);
       textArea.select();
-      document.execCommand('copy');
+      document.execCommand("copy");
       document.body.removeChild(textArea);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -76,7 +78,7 @@ export default function UrlShortenerForm() {
 
   const visitOriginal = () => {
     if (shortenedUrl) {
-      window.open(shortenedUrl.originalUrl, '_blank');
+      window.open(shortenedUrl.originalUrl, "_blank");
     }
   };
 
@@ -88,20 +90,18 @@ export default function UrlShortenerForm() {
             <div className="space-y-2">
               <Input
                 type="text"
-                placeholder="Enter your long URL here..."
+                placeholder="Shortify your link here..."
                 value={url}
                 onChange={(e) => {
                   setUrl(e.target.value);
-                  setError('');
+                  setError("");
                 }}
                 className="h-12 text-lg bg-white/20 border-white/30 placeholder:text-white/60 text-white focus:border-white/50"
                 disabled={isLoading}
               />
-              {error && (
-                <p className="text-red-300 text-sm">{error}</p>
-              )}
+              {error && <p className="text-red-300 text-sm">{error}</p>}
             </div>
-            
+
             <Button
               type="submit"
               disabled={isLoading || !url.trim()}
@@ -113,7 +113,7 @@ export default function UrlShortenerForm() {
                   <span>Shortening...</span>
                 </div>
               ) : (
-                'Shorten URL'
+                "Shorten URL"
               )}
             </Button>
           </form>
@@ -125,14 +125,16 @@ export default function UrlShortenerForm() {
           <CardContent className="p-6">
             <div className="space-y-4">
               <div className="text-center">
-                <h3 className="text-lg font-semibold text-white mb-2">Your shortened URL is ready!</h3>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  Your shortened URL is ready!
+                </h3>
                 <div className="bg-white/20 rounded-lg p-4 border border-white/30">
                   <p className="text-white/90 text-lg font-mono break-all">
                     {window.location.origin}/{shortenedUrl.shortCode}
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   onClick={copyToClipboard}
@@ -150,20 +152,23 @@ export default function UrlShortenerForm() {
                     </>
                   )}
                 </Button>
-                
+
                 <Button
                   onClick={visitOriginal}
                   variant="outline"
-                  c className="bg-transparent border border-white text-white hover:bg-white hover:text-black font-medium py-2 px-4 rounded transition"
+                  className="bg-transparent border border-white text-white hover:bg-white hover:text-black font-medium py-2 px-4 rounded transition"
                 >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   Visit Original
                 </Button>
               </div>
-              
+
               <div className="text-center text-white/60 text-sm">
                 <p>Click tracking: {shortenedUrl.clicks} visits</p>
-                <p>Created: {new Date(shortenedUrl.createdAt).toLocaleDateString()}</p>
+                <p>
+                  Created:{" "}
+                  {new Date(shortenedUrl.createdAt).toLocaleDateString()}
+                </p>
               </div>
             </div>
           </CardContent>

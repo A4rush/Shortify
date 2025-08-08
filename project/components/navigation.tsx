@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Link2, BarChart3, Home } from 'lucide-react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Link2, BarChart3, Home, User } from "lucide-react";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -14,31 +14,48 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
             <Link2 className="h-8 w-8 text-blue-400" />
-            <span className="text-xl font-bold text-white">LinkShort</span>
+            <span className="text-xl font-bold text-white">Shortify</span>
           </Link>
-          
+
           <div className="flex items-center space-x-4">
             <Link href="/">
               <Button
-                variant={pathname === '/' ? 'default' : 'ghost'}
+                variant={pathname === "/" ? "default" : "ghost"}
                 size="sm"
-                className={pathname === '/' 
-                  ? 'bg-blue-600 hover:bg-blue-700' 
-                  : 'text-white hover:bg-white/10'
+                className={
+                  pathname === "/"
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "text-white hover:bg-white/10"
                 }
               >
                 <Home className="w-4 h-4 mr-2" />
                 Home
               </Button>
             </Link>
-            
+
+            <Link href="/about">
+              <Button
+                variant={pathname === "/about" ? "default" : "ghost"}
+                size="sm"
+                className={
+                  pathname === "/about"
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "text-white hover:bg-white/10"
+                }
+              >
+                <User className="w-4 h-4 mr-2" />
+                About
+              </Button>
+            </Link>
+
             <Link href="/dashboard">
               <Button
-                variant={pathname === '/dashboard' ? 'default' : 'ghost'}
+                variant={pathname === "/dashboard" ? "default" : "ghost"}
                 size="sm"
-                className={pathname === '/dashboard' 
-                  ? 'bg-blue-600 hover:bg-blue-700' 
-                  : 'text-white hover:bg-white/10'
+                className={
+                  pathname === "/dashboard"
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "text-white hover:bg-white/10"
                 }
               >
                 <BarChart3 className="w-4 h-4 mr-2" />
