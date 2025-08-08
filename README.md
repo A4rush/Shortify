@@ -13,8 +13,8 @@
 
 ### 🏠 Homepage
 
-![Homepage](./project/public/homepage11.png)  
-![Homepage Alt](./project/public/homepage1.png)
+![Homepage](./project/public/homepage.png)  
+![Homepage Alt](./project/public/about.png)
 
 ### 📊 Dashboard
 
@@ -45,35 +45,53 @@
 
 ```
 project/
-├── .bolt/                # Local Bolt or config files
-├── .next/                # Build output (auto-generated)
-├── app/                  # Next.js App directory
-│   ├── [shortcode]/      # Dynamic routing for shortened links
-│   ├── dashboard/        # Dashboard page
-│   ├── layout.tsx        # Root layout wrapper
-│   └── page.tsx          # Homepage
-├── components/           # Reusable UI components
-├── hooks/                # Custom React hooks
-├── lib/                  # Utility functions
-├── public/               # Static assets
-├── styles/ or globals.css# Global styles
-├── .eslintrc.json        # Linting rules
-├── .gitignore            # Files to ignore in version control
-├── package.json          # Project metadata & scripts
-├── tailwind.config.ts    # Tailwind CSS configuration
-├── tsconfig.json         # TypeScript configuration
-└── next.config.js        # Next.js configuration
+|
+├── .next/ # Build output (auto-generated)
+├── .env.local # Env vars (e.g., NEXT_PUBLIC_BASE_URL)
+├── app/ # Next.js App Router
+│ ├── [shortcode]/ # Dynamic route for short links (redirect logic)
+│ │ └── page.tsx
+│ ├── dashboard/
+│ │ └── page.tsx # Your Dashboard (uses storage + env base URL)
+│ ├── privacy-policy/
+│ │ └── page.tsx # Privacy Policy page
+│ ├── terms-of-service/
+│ │ └── page.tsx # Terms of Service page
+│ ├── cookie-policy/
+│ │ └── page.tsx # Cookie Policy page
+│ ├── layout.tsx # Root layout (include <Footer /> or per-page)
+│ └── page.tsx # Homepage
+├── components/
+│ ├── footer.tsx # Footer with links to legal pages
+│ ├── stats-card.tsx # StatsCard used on dashboard
+│ └── ui/
+│ ├── badge.tsx
+│ ├── button.tsx
+│ └── card.tsx
+├── hooks/ # Custom hooks (if any)
+├── lib/
+│ ├── storage.ts # localStorage CRUD for URLs
+│ ├── url-shortener.ts # ShortenedUrl type and UrlShortener class
+│ └── url.ts # (optional) getShortUrl helper
+├── public/
+│ └── guts.png # Static assets
+├── styles/ # Global styles folder (or)
+│ └── globals.css
+├── .eslintrc.json
+├── .gitignore
+├── next.config.js
+├── package.json
+├── tailwind.config.ts
+└── tsconfig.json
 ```
-
----
 
 ## 📦 Getting Started
 
 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/luciusji/LinkShort.git
-cd LinkShort
+git clone https://github.com/A4rush/Shortify.git
+cd SHORTIFY
 ```
 
 2. **Install Dependencies**
@@ -118,9 +136,9 @@ This project is licensed under the MIT License — feel free to fork and build o
 
 Want to give feedback or collaborate?
 
-- GitHub: [github.com/luciusji](https://github.com/luciusji)
+- GitHub: [github.com/A4rush](https://github.com/A4rush)
 - Email: aarushmishrashitalaprasad@gmail.com
 
 ---
 
-_Built with 💙 by Aarush_
+Developed by Aarush.
